@@ -6,7 +6,7 @@ import com.societyos.backend.user.entity.User;
 import com.societyos.backend.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.core.Authentication;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -24,5 +24,11 @@ public class UserController {
         return ResponseEntity.ok(
                 userService.registerUser(request)
         );
+    }
+    @GetMapping("/me")
+    public String me(Authentication authentication) {
+
+        return "Logged in as: "
+                + authentication.getName();
     }
 }
